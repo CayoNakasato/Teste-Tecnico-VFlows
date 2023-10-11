@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário teste</title>
+    <link rel="stylesheet" href="./../styles/reset.css"/>
+    <link rel="stylesheet" href="./../styles/style.css"/>
+</head>
+<body>
+    <div class="container">
+
+
+        <h2 class="container-title">Cadastro Fornecedor/Produto</h2>
+
+        <div class="form-fornecedor">
+
+            <h3 class="form-fornecedor-title">Dados do Fornecedor</h3>
+
+            <form class="form-fornecedor-container">
+
+                <label class="input-container" id="input-medium"  for="razao-social">
+                    Razão Social
+                    <input id="razao-social" type="text"  required>
+                </label>
+                
+                <label class="input-container" for="cnpj">
+                    CNPJ
+                    <input id="cnpj" type="text" required><br>
+                </label>
+
+                <label class="input-container" id="input-medium" for="nome-fantasia">
+                    Nome Fantasia
+                    <input id="nome-fantasia" type="text" required>
+                </label>
+
+                <label class="input-container" for="inscricao-estadual">
+                    Inscrição Estadual
+                    <input id="inscricao-estadual" type="text" required><br>
+                </label>
+
+                <label class="input-container" id="container-cep" for="cep">
+                    CEP 
+                    <input type="text" required maxlength="9" name="cep" id="cep">
+                    <button type="button" id="buscar-cep">Buscar CEP</button>
+                </label>
+
+                <label class="input-container" for="inscricao-municipal">
+                    Inscrição Municipal
+                    <input id="inscricao-municipal" type="text" required><br>
+                </label>
+
+                <label class="input-container" id="input-medium" for="logradouro">
+                    Endereço
+                    <input type="text" id="logradouro" name="logradouro">
+                </label>
+
+                <label class="input-container" for="numeroEndeerco">
+                    Número
+                    <input type="text" id="numeroEndeerco" name="numeroEndeerco">
+                </label>
+
+                <label class="input-container" id="input-complemento" for="complementoEndereco">
+                    Complemento
+                    <input type="text" id="complementoEndereco" name="complementoEndereco">
+                </label>
+
+                <label class="input-container" id="input-small" for="bairro">
+                    Bairro
+                    <input type="text" id="bairro" name="bairro">
+                </label>
+
+                <label class="input-container" id="input-small" for="cidade">
+                    Município
+                    <input type="text" id="cidade" name="cidade">
+                </label>
+
+                <label class="input-container" id="input-estado" for="estado">
+                    Estado
+                    <input type="text" id="estado" name="estado">
+                </label>
+
+                <label class="input-container" id="input-contato">
+                    Nome da Pessoa do Contato
+                    <input id="nome-contato" type="text" required><br>
+                </label>
+
+                <label class="input-container" id="input-small" for="telefone">
+                    Telefone
+                    <input id="telefone" type="number" required><br>
+                </label>
+
+                <label class="input-container" id="input-small" for="email">
+                    E-mail
+                    <input id="email" type="email" required><br>
+                </label>
+
+            </form>
+
+        </div>
+
+        <div class="form-produtos">
+
+            <h3 class="form-produtos-title">Produtos</h3>
+
+            <div class="lista-produtos">
+                <form class="form-produto">
+                    <div class="container-produto">
+
+                        <div>
+                            <img src="../assets/imgs/foto-genérica.jpg" alt="Imagem do Produto" id="imagem-produto">
+                        </div>
+
+                       <div class="product-info">
+
+                           <label class="input-container" id="container-produto-name" for="nome-produto">
+                               Produto
+                               <input type="text" name="nome-produto" id="nome-produto-input">
+                            </label>
+                            
+                                <div class="product-info-small">
+
+                                    <label class="input-container" id="input-container-produto" for="unidade-medida">
+                                        UND. Medida
+                                        <input type="text" name="unidade-medida" id="unidade-medida">
+                                    </label>
+                                    
+                                    <label class="input-container" for="quantidade-estoque">
+                                        QDTDE. em Estoque
+                                        <input type="number" name="quantidade-estoque" id="quantidade-estoque">
+                                    </label>
+                                    
+                                    <label class="input-container" id="input-container-produto" for="valor-unitario">
+                                        Valor Unitário
+                                        <input type="number" name="valor-unitario" id="valor-unitario" onchange={atualizarValorTotalProduto()}>
+                                    </label>
+                                    
+                                    <label class="input-container" id="input-container-produto" for="valor-total">
+                                        Valor total
+                                        <input type="text" name="valor-total" id="valor-total" disabled="">
+                                    </label>
+                                </div>
+                        </div> 
+
+                    </div>
+                    
+                    <button type="button" class="btn_finish_task" onclick={adicionarProduto()}> Adicionar Produto</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="form-anexos">
+
+            <h3 class="form-anexos-title">Anexos</h3>
+
+
+            <div class="container-anexos">
+                <div class="container-anexos-list">
+                    <h4 class="itens-title">Itens</h4>
+                    <div id="lista-anexos">
+                    </div>
+                </div>
+                <input type="file" size="60" id="incluir-anexo"/>
+                <button type="button" class="btn_finish_task" id="btn_finish_task_anexos" onclick={updateArquivo()}> Incluir Anexo</button>
+            </div>
+
+        </div>
+
+        <button type="button" class="btn_finish_task" id="salvar-fornecedor"> Salvar Fornecedor</button>
+
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <div class="loader"></div>
+                <p>Aguarde, carregando...</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="./../script.js"></script>
+</body>
+</html>
